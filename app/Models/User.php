@@ -30,4 +30,18 @@ class User extends Authenticatable
         'is_active' => 'boolean',
     ];
 
+    public function mamaInformation()
+    {
+        return $this->hasOne(MamaInformation::class);
+    }
+
+    public function mamaTypes()
+    {
+        return $this->hasMany(MamaType::class);
+    }
+
+    public function userPaies()
+    {
+        return $this->hasMany(UserPay::class);
+    }
 }

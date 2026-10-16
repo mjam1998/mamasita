@@ -20,4 +20,9 @@ class City extends Model
     {
         return $this->belongsTo(Province::class);
     }
+
+    public function mamaInformations()
+    {
+        return $this->hasMany(MamaInformation::class);
+    }
 }
