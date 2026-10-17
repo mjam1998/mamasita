@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->decimal('price', 15, 0);
-            $table->decimal('discount', 5, 2)->default(0);
-            $table->decimal('mama_percentage', 5, 2)->default(0);
+            $table->decimal('discount_amount', 15, 0)->default(0);
+            $table->decimal('mama_share', 15, 0);
             $table->tinyInteger('type')->comment('1-online-visit,2-monthly-subscription,3-doula-subscription');
             $table->tinyInteger('month_period')->nullable();
             $table->boolean('is_active')->default(1);

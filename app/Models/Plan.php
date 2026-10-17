@@ -15,7 +15,7 @@ class Plan extends Model
         'slug',
         'image',
         'price',
-        'discount',
+        'discount_amount',
         'mama_percentage',
         'type',
         'month_period',
