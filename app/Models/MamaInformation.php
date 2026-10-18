@@ -17,6 +17,9 @@ class MamaInformation extends Model
         'card_number',
         'iban_number',
         'status',
+        'image',
+        'image_alt',
+        'image_title',
     ];
 
     protected $casts = [
