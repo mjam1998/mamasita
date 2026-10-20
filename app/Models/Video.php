@@ -26,4 +26,9 @@ class Video extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function WeeklyVideos()
+    {
+        return $this->hasMany(WeeklyVideo::class);
+    }
 }

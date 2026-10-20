@@ -64,4 +64,9 @@ class MonthlySubscription extends Model
     {
         return $this->hasMany(Call::class);
     }
+
+    public function WeeklyVideos()
+    {
+        return $this->hasMany(WeeklyVideo::class);
+    }
 }

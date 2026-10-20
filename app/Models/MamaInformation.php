@@ -20,6 +20,7 @@ class MamaInformation extends Model
         'image',
         'image_alt',
         'image_title',
+        'doula_price'
     ];
 
     protected $casts = [

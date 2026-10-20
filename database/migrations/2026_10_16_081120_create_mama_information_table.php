@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('city_id');
             $table->string('education_file', 400);
             $table->string('national_card_file', 400);
+            $table->decimal('doula_price', 15, 0)->nullable();
             $table->string('bank_name', 255);
             $table->string('card_number', 16);
             $table->string('iban_number', 24);
