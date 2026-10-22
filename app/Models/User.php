@@ -44,4 +44,34 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserPay::class);
     }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function userMonthlySubscriptions()
+    {
+        return $this->hasMany(MonthlySubscription::class, 'user_id');
+    }
+
+    public function mamaMonthlySubscriptions()
+    {
+        return $this->hasMany(MonthlySubscription::class, 'mama_id');
+    }
+
+    public function userDoulaSubscriptions()
+    {
+        return $this->hasMany(DoulaSubscription::class, 'user_id');
+    }
+
+    public function mamaDoulaSubscriptions()
+    {
+        return $this->hasMany(DoulaSubscription::class, 'mama_id');
+    }
+
+    public function adminPays()
+    {
+        return $this->hasMany(AdminPay::class);
+    }
 }
