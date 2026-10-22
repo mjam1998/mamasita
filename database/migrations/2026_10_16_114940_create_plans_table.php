@@ -14,7 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('image')->nullable();
+            $table->string('image', '400')->nullable();
+            $table->string('image_alt', '400')->nullable();
+            $table->string('image_title', '400')->nullable();
+            $table->string('meta_description', '400')->nullable();
+            $table->string('meta_title', '400')->nullable();
             $table->decimal('price', 15, 0);
             $table->decimal('discount_amount', 15, 0)->default(0);
             $table->decimal('mama_share', 15, 0);

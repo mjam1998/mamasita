@@ -17,9 +17,11 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->decimal('price', 15, 0);
             $table->decimal('discount_amount', 15, 0)->default(0);
-            $table->string('image', 400);
-            $table->string('image_alt', 400)->nullable();
-            $table->string('image_title', 400)->nullable();
+            $table->string('image', '400')->nullable();
+            $table->string('image_alt', '400')->nullable();
+            $table->string('image_title', '400')->nullable();
+            $table->string('meta_description', '400')->nullable();
+            $table->string('meta_title', '400')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(1);
             $table->timestamps();

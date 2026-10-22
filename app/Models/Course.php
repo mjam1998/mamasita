@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Course extends Model
 {
@@ -26,5 +28,22 @@ class Course extends Model
     public function freeVideos()
     {
         return $this->hasMany(Video::class);
+    }
+
+    public function courseLimit()
+    {
+        return $this->hasOne(CourseLimit::class);
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function approvedComments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable')
+            ->where('status', Status::Active)
+            ->with(['user']);
     }
 }
