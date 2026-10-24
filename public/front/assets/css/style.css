@@ -1,0 +1,861 @@
+/* ================================================
+   ماماسیتا – Global Styles
+   ================================================ */
+
+/* ---------- Root tokens ---------- */
+:root {
+  --primary:       #c0396e;
+  --primary-light: #e8557f;
+  --primary-bg:    #fdf0f5;
+  --purple-bg:     #f3e8ff;
+  --purple-accent: #9b5fe4;
+  --text-dark:     #1a1a2e;
+  --text-mid:      #555;
+  --text-light:    #888;
+  --card-radius:   16px;
+  --btn-radius:    50px;
+  --transition:    0.25s ease;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%; /* این مقدار حتما باید 100 درصد باشد نه 100vw */
+}
+
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: #fff;
+  color: var(--text-dark);
+  direction: rtl;
+  /* offset for fixed navbar */
+  padding-top: 72px;
+}
+
+
+img { max-width: 100%; }
+
+/* ================================================
+   NAVBAR
+   ================================================ */
+.navbar { padding: 0.75rem 0; }
+
+.logo-icon {
+  width: 54px;
+  height: 64px;
+  border-radius: 50%;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.logo-icon--sm {
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+}
+
+.logo-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: block;
+  line-height: 1.2;
+}
+
+.logo-sub {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark) !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary) !important;
+  background: var(--primary-bg);
+}
+
+.nav-link.active { border-bottom: 2px solid var(--primary); }
+
+.nav-icon {
+  color: var(--text-mid);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.nav-icon:hover { color: var(--primary); }
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.6rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================================
+   HERO
+   ================================================ */
+.hero-section {
+  background: linear-gradient(135deg, #fff 55%, var(--primary-bg) 100%);
+  padding: 3rem 0 2rem;
+  overflow: hidden;
+}
+
+.min-vh-80 { min-height: 80vh; }
+
+.hero-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.btn-primary-custom {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--btn-radius);
+  padding: 0.75rem 2rem;
+  font-family: 'Vazirmatn', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.btn-primary-custom:hover {
+  background: var(--primary-light);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(192, 57, 110, 0.3);
+}
+
+.hero-image-col { position: relative; }
+
+.hero-image-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-blob {
+  position: absolute;
+  width: 500px;
+  height: 520px;
+  background: var(--primary-bg);
+  border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-img {
+  position: relative;
+  z-index: 1;
+  width: 85%;
+  max-width: 400px;
+  border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+  box-shadow: 0 20px 60px rgba(192, 57, 110, 0.15);
+}
+
+.hero-deco {
+  position: absolute;
+  z-index: 2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.hero-deco-1 {
+  background: #fff;
+  color: var(--primary);
+  width: 52px;
+  height: 52px;
+  top: 15%;
+  right: 5%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero-deco-2 {
+  background: var(--primary);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  bottom: 20%;
+  left: 5%;
+  box-shadow: 0 4px 16px rgba(192, 57, 110, 0.4);
+  animation: float 3.5s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ================================================
+   FEATURES BAR
+   ================================================ */
+.features-bar {
+  background: #fff;
+  padding: 2rem 0;
+  border-top: 1px solid #f0e0e8;
+  border-bottom: 1px solid #f0e0e8;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--card-radius);
+  background: var(--primary-bg);
+  height: 100%;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.feature-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.feature-sub {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* ================================================
+   SECTION COMMONS
+   ================================================ */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 0.2rem;
+}
+
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.btn-see-all {
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+.btn-see-all:hover { color: var(--primary-light); }
+
+/* ================================================
+   SLIDER
+   ================================================ */
+.slider-track-outer {
+  overflow: hidden;
+  border-radius: var(--card-radius);
+}
+
+.slider-track {
+  display: flex;
+  gap: 1.25rem;
+  transition: transform 0.4s ease;
+  will-change: transform;
+  padding: 0.5rem 0.25rem 1rem;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: #fff;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.slider-btn:hover { background: var(--primary); color: #fff; }
+
+.slider-btn-prev { right: -20px; }
+.slider-btn-next { left: -20px; }
+
+/* ================================================
+   COURSE CARDS
+   ================================================ */
+   .course-card {
+   
+    width: 320px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: var(--transition);
+    display: flex;            /* اضافه شد */
+    flex-direction: column;   /* اضافه شد */
+    height: 100%;             /* اضافه شد */
+  }
+  
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(192, 57, 110, 0.15);
+}
+
+
+
+.course-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0; /* اضافه شد: مطمئن شوید تصویر فشرده نمی‌شود */
+}
+
+.course-thumb img {
+  width: 100%;
+  height: 100% !important; /* اضافه شد: تحمیل ارتفاع کامل */
+  object-fit: cover;
+  display: block;
+}
+
+
+
+.play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(192, 57, 110, 0.25);
+}
+.play-btn i {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.course-body {
+  padding: 1rem;
+}
+
+.course-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+  color: var(--text-dark);
+}
+
+.course-meta {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-bottom: 0.3rem;
+}
+
+.course-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.btn-course {
+  display: block;
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--btn-radius);
+  padding: 0.5rem;
+  font-family: 'Vazirmatn', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+  transition: var(--transition);
+}
+.btn-course:hover { background: var(--primary-light); color: #fff; }
+
+/* ================================================
+   SERVICE CARDS
+   ================================================ */
+.service-card {
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.service-card--purple { background: var(--purple-bg); }
+.service-card--pink   { background: var(--primary-bg); }
+
+.service-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  margin-bottom: 0.75rem;
+}
+
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  margin-bottom: 0.5rem;
+}
+
+.service-list li i { color: var(--primary); }
+
+.service-big-icon {
+  font-size: 6rem;
+  color: var(--primary);
+  opacity: 0.15;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.service-card--purple .service-big-icon { color: var(--purple-accent); }
+
+/* ================================================
+   MIDWIVES
+   ================================================ */
+.bg-light-pink { background: var(--primary-bg); }
+
+/* اصلاح midwife-card برای عملکرد در اسلایدر */
+.midwife-card {
+  width: 250px;             /* عرض هر کارت */
+  min-width: 250px;
+  flex-shrink: 0;           /* جلوگیری از جمع شدن در flexbox */
+  background: #fff;
+  border-radius: var(--card-radius);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.midwife-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(192, 57, 110, 0.12);
+}
+
+.midwife-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-bg);
+  margin-bottom: 0.75rem;
+}
+
+.midwife-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.midwife-role {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-bottom: 0.4rem;
+}
+
+.midwife-rating {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-outline-primary-custom {
+  display: inline-block;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  border-radius: var(--btn-radius);
+  padding: 0.4rem 1.2rem;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.btn-outline-primary-custom:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ================================================
+   BLOG CARDS
+   ================================================ */
+.blog-card {
+ 
+ width: 260px;
+
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(192, 57, 110, 0.15);
+}
+
+.blog-thumb {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.blog-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.blog-card:hover .blog-thumb img { transform: scale(1.05); }
+
+.blog-body { padding: 1rem; }
+
+.blog-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.blog-date {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ================================================
+   FOOTER
+   ================================================ */
+
+  
+  .site-footer {
+    background-color: #ebe2f1; /* یا هر رنگ پس‌زمینه متناسب با عکستان */
+    background-image: url(../img/footer.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100% auto;
+    padding: 4rem 0 2rem;
+    color: #9b5fe4;
+  }
+
+.footer-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #9b5fe4;
+  margin-bottom: 1.2rem;
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color:#9b5fe4;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li { margin-bottom: 0.6rem; }
+
+.footer-links a {
+  color:#9b5fe4;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--primary-light); }
+
+.social-links a {
+  color: #9b5fe4;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.social-links a:hover { color: var(--primary-light); }
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.newsletter-input {
+  flex: 1;
+  min-width: 0;
+  background: white;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--btn-radius);
+  padding: 0.6rem 1.2rem;
+  color: #9b5fe4;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  direction: rtl;
+}
+.newsletter-input::placeholder { color:#9b5fe4; }
+.newsletter-input:focus { border-color: var(--primary-light); }
+
+.newsletter-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--btn-radius);
+  padding: 0.6rem 1.5rem;
+  font-family: 'Vazirmatn', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.newsletter-btn:hover { background: var(--primary-light); }
+
+.footer-divider {
+  border-color: #9b5fe4;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: #9b5fe4;
+  margin: 0;
+}
+/* هر ستون/آیتم flex بتواند کوچک‌تر از محتوایش شود */
+.row > *,
+.slider-track-outer,
+.hero-image-col,
+.hero-image-wrap {
+  min-width: 0;
+}
+
+.slider-track-outer {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* دکمه‌ها داخل کادر بمانند، نه بیرون آن */
+.slider-btn-prev { right: 8px; }
+.slider-btn-next { left: 8px; }
+
+.hero-image-wrap {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.hero-blob {
+  width: min(500px, 100%);
+  height: auto;
+  aspect-ratio: 500 / 520;
+}
+
+
+/* ================================================
+   RESPONSIVE ADJUSTMENTS
+   ================================================ */
+@media (max-width: 991.98px) {
+  .hero-section { padding: 2rem 0; }
+  .hero-text { text-align: center; padding-top: 1rem; }
+  .btn-primary-custom { margin: 0 auto; }
+  .hero-image-col { margin-bottom: 2rem; }
+  .hero-blob { width: 300px; height: 300px; }
+
+  .slider-btn-prev { right: -12px; }
+  .slider-btn-next { left: -12px; }
+
+  .navbar-nav {
+    margin-bottom: 1rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.65rem 1rem !important;
+  }
+
+  .navbar-icons {
+    padding: 0.75rem 0 0;
+    border-top: 1px solid #f0e0e8;
+    justify-content: flex-start;
+    gap: 1.5rem !important;
+  }
+}
+
+
+@media (max-width: 575.98px) {
+  .section-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .service-card { flex-direction: column; text-align: center; }
+  .service-big-icon { font-size: 4rem; }
+  .slider-btn { display: none; }
+  .slider-track-outer { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .slider-track { padding-bottom: 0.5rem; }
+  .course-card, .blog-card { scroll-snap-align: start; min-width: 72vw; }
+}
+/* غیرفعال کردن fixed-top در موبایل */
+@media (max-width: 991.98px) {
+  /* حذف فضای خالی بالای بدنه که برای navbar ثابت در نظر گرفته بودید */
+  body {
+    padding-top: 0 !important;
+  }
+
+  /* تغییر موقعیت navbar از fixed به static */
+  .navbar.fixed-top {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* افزودن midwife-card در کنار بقیه */
+  .course-card, .blog-card, .midwife-card { 
+    scroll-snap-align: start; 
+    min-width: 62vw; 
+  }
+}
+@media (max-width: 767.98px) {
+  .site-footer {
+    background-size: 100% 30% !important;
+  }
+}
+
+
+@media (max-width: 575.98px) {
+  .slider-btn { display: none; }
+
+  .slider-track-outer {
+    overflow-x: auto;
+    max-width: 100%;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .course-card,
+  .blog-card,
+  .midwife-card {
+    scroll-snap-align: start;
+    /* 72vw / 62vw را بردارید؛ عرض ثابت + overflow روی والد کافی است */
+  }
+}
