@@ -7,12 +7,13 @@
     <title>پنل مدیریت ماماسیتا</title>
 
     <link rel="stylesheet" href="{{asset('front/assets/bootstrap/bootstrap.rtl.min.css')}}"/>
-
     <link rel="stylesheet" href="{{asset('front/assets/bootstrap/bootstrap-icons.css')}}"/>
-
+    <link href="{{asset('front/assets/bootstrap/choices.min.css')}}" rel="stylesheet" />
     <link href="{{asset('front/assets/fonts/vazirmatn-font-face.css')}}" rel="stylesheet"/>
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}"/>
+
+    @livewireStyles
 </head>
 <body>
 <div class="admin-shell">
@@ -52,9 +53,45 @@
             >
                 <i class="bi  bi-play-btn"></i><span>دوره‌های آموزشی</span>
             </button>
-            <button class="sidebar-link" data-page="midwives" data-title="ماماها" type="button">
-                <i class="bi bi-people"></i><span>ماماها</span>
-            </button>
+            <!-- آیتم بازشوی کاربران -->
+            <div class="sidebar-dropdown">
+                <button
+                    class="sidebar-link w-100"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#usersSubmenu"
+                    aria-expanded="false"
+                    aria-controls="usersSubmenu"
+                >
+                    <i class="bi-person-hearts"></i>
+                    <span>لیست کاربران</span>
+                    <i class="bi bi-chevron-down submenu-arrow ms-auto"></i>
+                </button>
+
+                <div class="collapse sidebar-submenu" id="usersSubmenu">
+                    <ul class="submenu-list">
+                        <li>
+                            <a href="{{route('admin.list.all')}}" class="sidebar-sublink ">
+                                <span class="sublink-dot"></span>
+                                <span>همه کاربران</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sidebar-sublink">
+                                <span class="sublink-dot"></span>
+                                <span>ماماها</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sidebar-sublink">
+                                <span class="sublink-dot"></span>
+                                <span>نقش‌ها و دسترسی‌ها</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <button
                 class="sidebar-link"
                 data-page="appointments"
@@ -141,6 +178,10 @@
 
 <script src="{{asset('front/assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/script.js')}}"></script>
+<script src="{{asset('front/assets/bootstrap/choices.min.js')}}"></script>
+
+@livewireScripts
+
 @stack('scripts')
 
 </body>

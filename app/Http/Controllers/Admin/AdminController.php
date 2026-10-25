@@ -11,4 +11,9 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+
+    public function allUsers()
+    {
+        return view('admin.users-list.all-users');
+    }
 }

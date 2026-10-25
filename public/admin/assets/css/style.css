@@ -134,6 +134,7 @@ button {
   border: 0;
   border-radius: 12px;
   transition: 0.2s ease;
+    text-decoration: none;
 }
 
 .sidebar-link > i {
@@ -1103,3 +1104,214 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+/* چرخش نرم فلش هنگام باز شدن */
+.submenu-arrow {
+    margin-right: auto;
+    font-size: 12px !important;
+    width: auto !important;
+    color: #8b8796;
+    transition: transform 0.25s ease !important;
+}
+
+.sidebar-link[aria-expanded="true"] .submenu-arrow {
+    transform: rotate(180deg);
+    color: var(--primary);
+}
+
+/* ظرف زیرمنو */
+.sidebar-submenu {
+    margin-bottom: 6px;
+}
+
+.submenu-list {
+    padding: 4px 18px 4px 0;
+    margin: 0;
+    list-style: none;
+    border-right: 2px dashed #f0e6eb; /* خط راهنمای عمودی */
+}
+
+/* آیتم‌های زیرمنو */
+.sidebar-sublink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #7b7888;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+/* نقطه قبل از عنوان */
+.sublink-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #c9c5d4;
+    transition: 0.2s ease;
+}
+
+/* حالت Hover */
+.sidebar-sublink:hover {
+    color: var(--primary);
+    background: #fff8fa;
+    /* انیمیشن لغزش کوچک به چپ */
+}
+
+.sidebar-sublink:hover .sublink-dot {
+    background-color: var(--primary);
+}
+
+/* حالت Active در زیرمنو */
+.sidebar-sublink.active {
+    color: var(--primary);
+    font-weight: 700;
+    background: var(--primary-soft);
+}
+
+.sidebar-sublink.active .sublink-dot {
+    background-color: var(--primary);
+    box-shadow: 0 0 0 2px #fff8fa;
+}
+
+
+/* استایل جدوال */
+.custom-card {
+    background: #ffffff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+}
+
+/* فیلدهای جستجو و سلکت */
+.custom-input, .custom-select {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    color: var(--text-dark);
+    background-color: var(--canvas);
+    transition: all 0.2s ease;
+}
+.custom-input:focus, .custom-select:focus {
+    background-color: #fff;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 0.25rem rgba(192, 57, 110, 0.15);
+    outline: none;
+}
+
+/* دکمه‌های تم اختصاصی */
+.btn-theme-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s;
+}
+.btn-theme-primary:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+    color: #fff;
+}
+.btn-theme-add {
+    background-color: #0e9f6e;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    transition: all 0.2s;
+}
+.btn-theme-add:hover {
+    background-color: #0b8259;
+    color: #fff;
+}
+
+/* استایل تمیز جدول */
+.table-custom {
+    margin-bottom: 0;
+    vertical-align: middle;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.table-custom thead th {
+    background-color: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 600;
+    border: none;
+    padding: 0.9rem 1rem;
+}
+.table-custom thead th:first-child { border-top-right-radius: 12px; }
+.table-custom thead th:last-child { border-top-left-radius: 12px; }
+
+.table-custom tbody tr {
+    transition: background-color 0.15s ease;
+}
+.table-custom tbody tr:hover {
+    background-color: rgba(253, 240, 245, 0.4);
+}
+.table-custom td {
+    padding: 0.85rem 1rem;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border);
+    border-top: none;
+}
+
+/* بج‌های هماهنگ با تم (نقش‌ها و وضعیت) */
+.badge-role {
+    background-color: var(--purple-soft);
+    color: var(--purple);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.4em 0.75em;
+}
+.badge-status-active {
+    background-color: #eaf8f0;
+    color: #0e9f6e;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.4em 0.75em;
+}
+.badge-status-inactive {
+    background-color: #fde8e8;
+    color: #f05252;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.4em 0.75em;
+}
+
+/* دراپ‌داون دکمه عملیات */
+.btn-action {
+    background-color: var(--canvas);
+    color: var(--text-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.35rem 0.8rem;
+    transition: all 0.2s;
+}
+.btn-action:hover, .btn-action:focus {
+    background-color: var(--primary-soft);
+    color: var(--primary);
+    border-color: var(--primary-light);
+}
+.custom-dropdown-menu {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 0.5rem;
+}
+.custom-dropdown-menu .dropdown-item {
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+.custom-dropdown-menu .dropdown-item:hover {
+    background-color: var(--primary-soft);
+    color: var(--primary);
+}
+/*  پایان استایل جدوال */
