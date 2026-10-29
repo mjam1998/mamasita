@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\MamaFiled;
 use App\Enums\MamaInformationStatus;
+use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\MamaInformation;
+use App\Models\MamaType;
 use App\Models\Province;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -95,7 +99,16 @@ class UserController extends Controller
                 Rule::unique('users')->ignore($user->id),
             ],
             'password' => 'nullable|string|min:6|confirmed',
-            'roles' => 'required|array|min:1',
+            'roles' => [
+                'required',
+                'array',
+                'min:1',
+                function ($attribute, $value, $fail) {
+                    if (in_array('mama', $value) && in_array('pending-mama', $value)) {
+                        $fail('یک کاربر نمی‌تواند همزمان هر دو نقش «ماما» و «ماما در حال بررسی» را داشته باشد.');
+                    }
+                },
+            ],
             'roles.*' => 'exists:roles,name',
             'is_active' => 'nullable|boolean',
         ], [
@@ -136,10 +149,9 @@ class UserController extends Controller
     {
         $mamaInformation = $user->mamaInformation;
         if (! $mamaInformation) {
-            $user->mamaInformation()->create([
-                'province_id' => Province::first()->id,
-                'city_id' => City::first()->id,
-
+            $mamaInformation = $user->mamaInformation()->create([
+                'province_id' => Province::first()?->id,
+                'city_id' => City::first()?->id,
             ]);
         }
         $provinces = Province::all();
@@ -243,7 +255,94 @@ class UserController extends Controller
         }
 
         $mamaInformation->update($validated);
+        $user = $mamaInformation->user;
+        if ($user) {
+            $selectedStatus = (int) $validated['status'];
 
-        return redirect()->route('admin.list.mama')->with('success', 'مدارک و اطلاعات ماما با موفقیت به‌روزرسانی شد.');
+            if ($selectedStatus === MamaInformationStatus::Active->value) {
+                if ($user->hasRole('pending-mama')) {
+                    $user->removeRole('pending-mama');
+                }
+                if (! $user->hasRole('mama')) {
+                    $user->assignRole('mama');
+                }
+            }
+        }
+
+        return back()->with('success', 'مدارک و اطلاعات ماما با موفقیت به‌روزرسانی شد.');
+    }
+
+    public function mamaFields(User $user)
+    {
+
+        $existingTypes = MamaType::where('user_id', $user->id)
+            ->get()
+            ->keyBy(fn ($item) => $item->type->value);
+
+        $fields = MamaFiled::cases();
+        $statuses = Status::cases();
+
+        return view('admin.user.mama.fields', compact('user', 'existingTypes', 'fields', 'statuses'));
+    }
+
+    public function updateMamaFields(Request $request, User $user)
+    {
+        $request->validate([
+            'enabled_fields' => ['nullable', 'array'],
+            'enabled_fields.*' => [new Enum(MamaFiled::class)],
+            'status' => ['required', 'array'],
+            'status.*' => [new Enum(Status::class)],
+        ]);
+
+        $enabledFields = $request->input('enabled_fields', []);
+        $statuses = $request->input('status', []);
+
+        // ۱. حوزه‌های فعال‌شده: ایجاد تقاضای جدید یا به‌روزرسانی وضعیت قبلی
+        foreach ($enabledFields as $fieldValue) {
+            $statusValue = $statuses[$fieldValue] ?? Status::Pending->value;
+
+            MamaType::updateOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'type' => $fieldValue,
+                ],
+                [
+                    'status' => $statusValue,
+                ]
+            );
+        }
+
+        // ۲. حوزه‌هایی که تیک آنها برداشته شده: لغو/حذف تقاضا
+        MamaType::where('user_id', $user->id)
+            ->whereNotIn('type', $enabledFields)
+            ->delete();
+
+        return back()->with('success', 'حوزه‌ها و تقاضاهای فعالیت ماما با موفقیت به‌روزرسانی شدند.');
+    }
+
+    public function search(Request $request): JsonResponse
+    {
+        $q = trim($request->input('q', ''));
+
+        if (mb_strlen($q) < 2) {
+            return response()->json([]);
+        }
+
+        $users = User::query()
+            ->where(function ($query) use ($q) {
+                $query->where('mobile', 'like', "%{$q}%")
+                    ->orWhere('first_name', 'like', "%{$q}%")
+                    ->orWhere('last_name', 'like', "%{$q}%")
+                    ->orWhereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$q}%"]);
+            })
+            ->select(['id', 'first_name', 'last_name', 'mobile'])
+            ->limit(15)
+            ->get()
+            ->map(fn ($u) => [
+                'value' => $u->id,
+                'label' => "{$u->first_name} {$u->last_name} ({$u->mobile})",
+            ]);
+
+        return response()->json($users);
     }
 }

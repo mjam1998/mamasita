@@ -17,7 +17,7 @@ class RoleUserSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $roles = ['super-admin', 'user', 'mama'];
+        $roles = ['super-admin', 'user', 'mama', 'pending-mama'];
 
         foreach ($roles as $roleName) {
             Role::firstOrCreate([

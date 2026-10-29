@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('front/assets/bootstrap/bootstrap-icons.css')}}"/>
     <link href="{{asset('front/assets/bootstrap/choices.min.css')}}" rel="stylesheet" />
     <link href="{{asset('front/assets/fonts/vazirmatn-font-face.css')}}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{asset('admin/assets/css/persianDatepicker-default.css')}}"/>
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}"/>
 
@@ -35,7 +36,7 @@
         <nav class="sidebar-nav" aria-label="منوی مدیریت">
             <span class="nav-heading">منوی اصلی</span>
             <button
-                class="sidebar-link active"
+                class="sidebar-link "
                 data-page="dashboard"
                 data-title="داشبورد"
                 type="button"
@@ -53,6 +54,15 @@
             >
                 <i class="bi  bi-play-btn"></i><span>دوره‌های آموزشی</span>
             </button>
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.plan.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" پلن ها"
+                type="button"
+                href="{{route('admin.plan.index')}}"
+            >
+                <i class="bi bi-gem"></i><span>پلن ها </span>
+            </a>
             <!-- آیتم بازشوی کاربران -->
             <div class="sidebar-dropdown">
                 <button
@@ -83,23 +93,24 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="sidebar-sublink">
+                            <a href="{{route('admin.list.pending.mama')}}" class="sidebar-sublink">
                                 <span class="sublink-dot"></span>
-                                <span>نقش‌ها و دسترسی‌ها</span>
+                                <span>ماماهای درانتظار بررسی</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <button
-                class="sidebar-link"
-                data-page="appointments"
-                data-title="نوبت‌ها"
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.pay.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" پرداخت ها"
                 type="button"
+                href="{{route('admin.pay.index')}}"
             >
-                <i class="bi bi-calendar2-check"></i><span>نوبت‌ها</span>
-            </button>
+                <i class="bi bi-cash-coin"></i><span>پرداخت‌های سایت </span>
+            </a>
             <button class="sidebar-link" data-page="articles" data-title="مقالات" type="button">
                 <i class="bi bi-file-earmark-text"> </i><span>مقالات</span>
             </button>
@@ -179,7 +190,36 @@
 <script src="{{asset('front/assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/script.js')}}"></script>
 <script src="{{asset('front/assets/bootstrap/choices.min.js')}}"></script>
+<script src="{{asset('front/assets/bootstrap/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/persianDatepicker.min.js')}}"></script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#persianDate').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            autoClose: true,
+            observer: true,
+
+            position: 'auto',
+            toolbox: {
+                calendarSwitch: { enabled: false }
+            },
+            altField: '#hiddenDate', // اختیاری
+            navigator: {
+                enabled: true
+            },
+            // مهم‌ترین بخش:
+            initialValue: false,
+            calendar: {
+                persian: {
+                    leapYearMode: 'astronomical'
+                }
+            },
+            // موقعیت تقویم
+            placement: 'bottom' // یا 'top' یا 'auto'
+        });
+    });
+</script>
 @livewireScripts
 
 @stack('scripts')

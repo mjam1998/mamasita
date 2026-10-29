@@ -14,7 +14,7 @@ enum MamaInformationStatus: int
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'درحال بررسی',
+            self::Pending => 'نیازمند بررسی',
             self::Active => 'فعال',
             self::Inactive => 'غیرفعال',
             self::CompletingInformation => 'درحال تکمیل اطلاعات',

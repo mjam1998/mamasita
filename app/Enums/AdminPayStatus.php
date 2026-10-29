@@ -12,7 +12,7 @@ enum AdminPayStatus: int
     public function label(): string
     {
         return match ($this) {
-            self::Waiting => 'در حال بررسی',
+            self::Waiting => 'در انتظار پرداخت',
             self::Paid => 'پرداخت شده',
             self::Canceled => 'کنسل',
             self::Rejected => 'رد شده',

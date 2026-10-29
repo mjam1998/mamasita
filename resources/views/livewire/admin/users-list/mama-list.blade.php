@@ -63,16 +63,13 @@
                                         <span>مدارک</span>
                                     </a>
                                 </li>
-                                {{-- اگر بعداً خواستی گزینه‌های دیگر مثل حذف هم بذاری: --}}
-                                {{--
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <button type="button" class="dropdown-item d-flex align-items-center text-danger">
-                                        <i class="bi bi-trash3 ms-2 fs-6"></i>
-                                        <span>حذف</span>
-                                    </button>
+                                    <a href="{{ route('admin.mamas.fields', ['user' => $user]) }}" class="dropdown-item d-flex align-items-center">
+                                        <i class="bi bi-briefcase ms-2 me-1 fs-6"></i>
+                                        <span>حوزه فعالیت</span>
+                                    </a>
                                 </li>
-                                --}}
+
                             </ul>
                         </div>
                     </td>

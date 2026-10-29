@@ -1,13 +1,4 @@
-<div >
-    {{-- جستجو و فیلتر --}}
-    @php
-        $roleTranslations = [
-            'super-admin' => 'سوپر ادمین',
-            'user' => 'کاربر ',
-            'mama' => 'ماما',
-        ];
-    @endphp
-
+<div>
     <div class="row mb-4 g-2">
         <div class="col-12 col-md-6">
             <input type="text"
@@ -20,7 +11,9 @@
             <select wire:model.live="selectedRole" class="form-select custom-select" id="role_id">
                 <option value="">همه نقش‌ها</option>
                 @foreach($roles as $role)
-                    <option value="{{ $role->name }}"> {{ $roleTranslations[$role->name] ?? $role->name }}</option>
+                    <option value="{{ $role->name }}">
+                        {{ __('roles.' . $role->name) }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -53,9 +46,12 @@
                     <td class="text-center text-muted">{{ $user->mobile }}</td>
                     <td class="text-center">
                         @foreach($user->roles as $role)
-                            <span class="badge badge-role">{{ $roleTranslations[$role->name] ?? $role->name }}</span>
+                            <span class="badge badge-role">
+                             {{ __('roles.' . $role->name) }}
+                             </span>
                         @endforeach
                     </td>
+
                     <td class="text-center">
                         @if($user->is_active)
                             <span class="badge badge-status-active">فعال</span>
@@ -72,9 +68,11 @@
                                     aria-expanded="false">
                                 عملیات
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu shadow-sm" aria-labelledby="userActionDropdown-{{ $user->id }}">
+                            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu shadow-sm"
+                                aria-labelledby="userActionDropdown-{{ $user->id }}">
                                 <li>
-                                    <a href="{{ route('admin.users.edit', ['user' => $user]) }}" class="dropdown-item d-flex align-items-center">
+                                    <a href="{{ route('admin.users.edit', ['user' => $user]) }}"
+                                       class="dropdown-item d-flex align-items-center">
                                         <i class="bi bi-pencil-square ms-2 me-1 fs-6"></i>
                                         <span>ویرایش</span>
                                     </a>

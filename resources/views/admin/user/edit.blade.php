@@ -48,15 +48,16 @@
             <div class="col-12 col-md-6">
                 <label class="form-label">نقش‌های کاربر <span class="text-danger">*</span></label>
                 @php
-                    $roleTranslations = ['super-admin' => 'سوپر ادمین', 'user' => 'کاربر', 'mama' => 'ماما'];
+
                     $currentRoles = old('roles', $userRoles);
                 @endphp
                 <select name="roles[]" id="roles-select" class="form-select custom-select @error('roles') is-invalid @enderror" multiple>
                     @foreach($roles as $role)
-                        <option value="{{ $role->name }}" {{ in_array($role->name, $currentRoles) ? 'selected' : '' }}>
-                            {{ $roleTranslations[$role->name] ?? $role->name }}
+                        <option value="{{ $role->name }}" @selected(in_array($role->name, $currentRoles))>
+                            {{ __('roles.' . $role->name) }}
                         </option>
                     @endforeach
+
                 </select>
                 @error('roles') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 @error('roles.*') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
@@ -89,7 +90,7 @@
             </div>
 
             <div class="col-12 d-flex justify-content-end gap-2 mt-4">
-                <a href="{{ route('admin.list.all') }}" class="btn btn-theme-cancel">انصراف</a>
+                <a href="{{ url()->previous() }}" class="btn btn-theme-cancel">انصراف</a>
                 <button type="submit" class="btn btn-theme-primary px-4">ذخیره تغییرات</button>
             </div>
         </div>

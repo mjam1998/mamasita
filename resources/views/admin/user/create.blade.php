@@ -47,15 +47,16 @@
             <div class="col-12 col-md-6">
                 <label class="form-label">نقش‌های کاربر <span class="text-danger">*</span></label>
                 @php
-                    $roleTranslations = ['super-admin' => 'سوپر ادمین', 'user' => 'کاربر', 'mama' => 'ماما'];
+
                     $selectedRoles = old('roles', []);
                 @endphp
                 <select name="roles[]" id="roles-select" class="form-select custom-select @error('roles') is-invalid @enderror" multiple>
                     @foreach($roles as $role)
                         <option value="{{ $role->name }}" {{ in_array($role->name, $selectedRoles) ? 'selected' : '' }}>
-                            {{ $roleTranslations[$role->name] ?? $role->name }}
+                            {{ __('roles.' . $role->name) }}
                         </option>
                     @endforeach
+
                 </select>
                 @error('roles') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 @error('roles.*') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror

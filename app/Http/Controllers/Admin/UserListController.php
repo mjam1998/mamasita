@@ -16,4 +16,9 @@ class UserListController extends Controller
     {
         return view('admin.users-list.mama-list');
     }
+
+    public function allPendingMama()
+    {
+        return view('admin.users-list.pending-mama-list');
+    }
 }

@@ -2,15 +2,32 @@
 
 @section('content')
 
-    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom gap-2">
         <h5 class="fw-bold m-0" style="color: var(--primary);">
-            <i class="bi bi-person-vcard ms-1"></i>  مدارک و اطلاعات ماما: {{ $mamaInformation?->user->first_name . ' ' . $mamaInformation?->user->last_name }}
+            <i class="bi bi-person-vcard ms-1"></i> مدارک و اطلاعات ماما: {{ $mamaInformation?->user->first_name . ' ' . $mamaInformation?->user->last_name }}
         </h5>
-        <a href="{{ route('admin.list.mama') }}" class="btn btn-sm btn-outline-secondary">
-            <i class="bi bi-arrow-right"></i> بازگشت به لیست
-        </a>
-    </div>
 
+        {{-- نمایش تاریخ ثبت و آخرین به‌روزرسانی پرونده --}}
+        <div class="d-flex flex-wrap align-items-center gap-3 bg-light px-3 py-2 rounded-3 border fs-7 text-muted">
+            <div>
+                <i class="bi bi-calendar-plus text-primary me-1"></i>
+                <span>ثبت تقاضا:</span>
+                <strong class="text-dark">{{ $mamaInformation?->created_at ?  jdate($mamaInformation->created_at)->format('Y/m/d - H:i') : '---' }}</strong>
+            </div>
+            <div class="vr d-none d-sm-block"></div>
+            <div>
+                <i class="bi bi-clock-history text-secondary me-1"></i>
+                <span>آخرین ویرایش:</span>
+                <strong class="text-dark">{{ $mamaInformation?->updated_at ?  jdate($mamaInformation->updated_at)->format('Y/m/d - H:i') : '---' }}</strong>
+            </div>
+        </div>
+    </div>
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
+            <i class="bi bi-check-circle-fill me-1"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <form action="{{ route('admin.mamas.update', ['mama_information'=>$mamaInformation]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -33,6 +50,7 @@
                         </option>
                     @endforeach
                 </select>
+                <small class="text-muted"> اگر وضعیت مدارک رو تایید کنید نقش ماما به کاربر داده میشود و دسترسی به پنل ماما برای کاربر ایجاد میشود. </small>
                 @error('status') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
             </div>
 
@@ -255,7 +273,7 @@
 
         {{-- دکمه‌ها --}}
         <div class="col-12 d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
-            <a href="{{ route('admin.list.mama') }}" class="btn btn-theme-cancel">انصراف</a>
+            <a href="{{ url()->previous() }}" class="btn btn-theme-cancel">انصراف</a>
             <button type="submit" class="btn btn-theme-primary px-4">
                 <i class="bi bi-check-lg ms-1"></i> ذخیره تغییرات و مدارک
             </button>
