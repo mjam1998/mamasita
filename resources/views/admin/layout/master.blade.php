@@ -77,7 +77,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="sidebar-sublink">
+                            <a href="{{route('admin.list.mama')}}" class="sidebar-sublink">
                                 <span class="sublink-dot"></span>
                                 <span>ماماها</span>
                             </a>

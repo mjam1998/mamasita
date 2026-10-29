@@ -3,18 +3,25 @@
 @section('content')
 
 
-    <div class="custom-card">
+
         <h3 class="section-title mb-4">
             <i class="bi bi-people"> </i>لیست تمام کاربران سایت
         </h3>
         @if(session()->has('success'))
-            <p class="alert alert-success">{{session('success')}}</p>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span>{{ session('success') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
+
         @if(session()->has('error'))
-            <p class="alert alert-danger">{{session('error')}}</p>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span>{{ session('error') }}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
+
         @livewire('admin.users-list.all-users')
-    </div>
 
 
 

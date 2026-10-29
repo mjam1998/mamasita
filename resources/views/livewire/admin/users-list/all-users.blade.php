@@ -63,41 +63,36 @@
                             <span class="badge badge-status-inactive">غیرفعال</span>
                         @endif
                     </td>
-                    <td class="text-center">
-{{--                        <div class="dropdown">--}}
-{{--                            <button class="btn btn-sm btn-action dropdown-toggle" type="button" data-bs-toggle="dropdown">--}}
-{{--                                عملیات--}}
-{{--                            </button>--}}
-{{--                            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu">--}}
-{{--                                <li>--}}
-{{--                                    <a href="{{ route('admin.edit', ['user' => $user]) }}" class="dropdown-item">--}}
-{{--                                        <i class="bi bi-pencil ms-2"></i> ویرایش--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                                <li>--}}
-{{--                                    <a href="{{ route('admin.order.user.list', ['user' => $user]) }}" class="dropdown-item">--}}
-{{--                                        <i class="bi bi-cart ms-2"></i> سفارشات--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                                <li><hr class="dropdown-divider" style="border-color: var(--border);"></li>--}}
-{{--                                <li>--}}
-{{--                                    <a href="#"--}}
-{{--                                       class="dropdown-item {{ $user->is_active ? 'text-danger' : 'text-success' }}"--}}
-{{--                                       onclick="toggleStatus('{{ route('admin.change.status', ['user' => $user]) }}', 'status-form-{{ $user->id }}'); return false;">--}}
-{{--                                        <i class="bi {{ $user->is_active ? 'bi-toggle-off' : 'bi-toggle-on' }} ms-2"></i>--}}
-{{--                                        {{ $user->is_active ? 'غیرفعال‌سازی' : 'فعال‌سازی' }}--}}
-{{--                                    </a>--}}
-{{--                                    <form id="status-form-{{ $user->id }}"--}}
-{{--                                          action="{{ route('admin.change.status', ['user' => $user]) }}"--}}
-{{--                                          method="POST"--}}
-{{--                                          style="display:none;">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('PATCH')--}}
-{{--                                    </form>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
+                    <td class="text-center align-middle">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-action dropdown-toggle"
+                                    type="button"
+                                    id="userActionDropdown-{{ $user->id }}"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                عملیات
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu shadow-sm" aria-labelledby="userActionDropdown-{{ $user->id }}">
+                                <li>
+                                    <a href="{{ route('admin.users.edit', ['user' => $user]) }}" class="dropdown-item d-flex align-items-center">
+                                        <i class="bi bi-pencil-square ms-2 me-1 fs-6"></i>
+                                        <span>ویرایش</span>
+                                    </a>
+                                </li>
+                                {{-- اگر بعداً خواستی گزینه‌های دیگر مثل حذف هم بذاری: --}}
+                                {{--
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <button type="button" class="dropdown-item d-flex align-items-center text-danger">
+                                        <i class="bi bi-trash3 ms-2 fs-6"></i>
+                                        <span>حذف</span>
+                                    </button>
+                                </li>
+                                --}}
+                            </ul>
+                        </div>
                     </td>
+
                 </tr>
             @empty
                 <tr>

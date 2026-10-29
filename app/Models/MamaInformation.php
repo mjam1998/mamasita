@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Status;
+use App\Enums\MamaInformationStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -22,10 +22,11 @@ class MamaInformation extends Model
         'image_alt',
         'image_title',
         'doula_price',
+        'admin_review'
     ];
 
     protected $casts = [
-        'status' => Status::class,
+        'status' => MamaInformationStatus::class,
     ];
 
     public function user()
