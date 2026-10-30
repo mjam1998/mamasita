@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Enums\AdminPayStatus;
+use App\Enums\AdminPayType; // اضافه شد
 use App\Models\AdminPay;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,26 +17,37 @@ class AdminPayTable extends Component
 
     // متغیرهای فیلترهای ورودی
     public $searchInput = '';       // کد پیگیری
+
     public $selectedUserId = '';    // شناسه کاربر از Choices.js
+
     public $paidDateJalali = '';    // تاریخ شمسی انتخابی
+
     public $statusInput = '';       // وضعیت انتخابی
+
+    public $typeInput = '';         // نوع تراکنش انتخابی (جدید)
 
     // متغیرهای اعمال‌شده روی کوئری
     public $search = '';
+
     public $userId = '';
+
     public $paidDate = '';          // تاریخ میلادی تبدیل‌شده
+
     public $status = '';
+
+    public $type = '';              // اعمال‌شده روی کوئری (جدید)
 
     public function applySearch()
     {
         $this->search = trim($this->searchInput);
         $this->userId = $this->selectedUserId;
         $this->status = $this->statusInput;
+        $this->type = $this->typeInput; // اعمال نوع تراکنش
 
         // تبدیل تاریخ شمسی به میلادی
         if (! empty($this->paidDateJalali)) {
             try {
-                $this->paidDate = Jalalian::fromFormat('Y/m/d', $this->paidDateJalali)
+                $this->paidDate = Jalalian::fromFormat('Y/n/j', $this->paidDateJalali)
                     ->toCarbon()
                     ->format('Y-m-d');
             } catch (\Exception $e) {
@@ -54,7 +66,8 @@ class AdminPayTable extends Component
             'searchInput', 'search',
             'selectedUserId', 'userId',
             'paidDateJalali', 'paidDate',
-            'statusInput', 'status'
+            'statusInput', 'status',
+            'typeInput', 'type', // ریست نوع تراکنش
         ]);
         $this->resetPage();
         $this->dispatch('filters-reset');
@@ -72,13 +85,17 @@ class AdminPayTable extends Component
             ->when($this->userId, function ($q) {
                 $q->where('user_id', $this->userId);
             })
-            // فیلتر تاریخ پرداخت میلادی
-            ->when($this->paidDate, function ($q) {
-                $q->whereDate('paid_at', $this->paidDate);
+            // فیلتر نوع تراکنش
+            ->when($this->type !== '', function ($q) {
+                $q->where('type', $this->type);
             })
             // فیلتر وضعیت
             ->when($this->status !== '', function ($q) {
                 $q->where('status', $this->status);
+            })
+            // فیلتر تاریخ پرداخت میلادی
+            ->when($this->paidDate, function ($q) {
+                $q->whereDate('paid_at', $this->paidDate);
             })
             ->latest()
             ->paginate(10);
@@ -86,6 +103,7 @@ class AdminPayTable extends Component
         return view('livewire.admin.admin-pay-table', [
             'adminPays' => $adminPays,
             'statuses' => AdminPayStatus::cases(),
+            'types' => AdminPayType::cases(),
         ]);
     }
 }

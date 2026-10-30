@@ -7,7 +7,6 @@ enum AdminPayStatus: int
     case Waiting = 0;
     case Paid = 1;
     case Canceled = 2;
-    case Rejected = 3;
 
     public function label(): string
     {
@@ -15,7 +14,6 @@ enum AdminPayStatus: int
             self::Waiting => 'در انتظار پرداخت',
             self::Paid => 'پرداخت شده',
             self::Canceled => 'کنسل',
-            self::Rejected => 'رد شده',
         };
     }
 }

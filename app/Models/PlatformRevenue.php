@@ -15,6 +15,8 @@ class PlatformRevenue extends Model
         'direction',
         'type',
         'description',
+        'referenceable_type',
+        'referenceable_id',
     ];
 
     protected $casts = [

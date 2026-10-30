@@ -31,4 +31,9 @@ class UserPay extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function adminPay()
+    {
+        return $this->hasOne(AdminPay::class);
+    }
 }

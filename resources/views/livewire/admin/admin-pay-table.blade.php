@@ -1,7 +1,6 @@
 <div>
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
-
             <small class="text-muted">مدیریت و مشاهده تاریخچه تراکنش‌ها و پرداخت‌های سایت</small>
         </div>
         <a href="{{ route('admin.pay.create') }}" class="btn btn-theme-primary d-inline-flex align-items-center gap-1 shadow-sm">
@@ -9,16 +8,18 @@
             <span>افزودن</span>
         </a>
     </div>
+
+    {{-- باکس فیلترها --}}
     <div class="card mb-4 border-0 shadow-sm p-3">
         <div class="row g-2 align-items-end">
             {{-- جستجو بر اساس کد پیگیری --}}
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-2">
                 <label class="form-label small text-muted">کد پیگیری</label>
                 <input type="text"
                        wire:model.defer="searchInput"
                        wire:keydown.enter="applySearch"
                        class="form-control custom-input"
-                       placeholder="مثال: FS657G8...">
+                       placeholder="FS657G8...">
             </div>
 
             {{-- سلکت باکس کاربر با جستجوی ایجکسی Choices.js --}}
@@ -26,6 +27,17 @@
                 <label class="form-label small text-muted">کاربر (نام یا موبایل)</label>
                 <select id="user-select-choices" class="form-select custom-select">
                     <option value="">همه کاربران...</option>
+                </select>
+            </div>
+
+            {{-- فیلتر نوع تراکنش (جدید) --}}
+            <div class="col-12 col-md-2">
+                <label class="form-label small text-muted">نوع تراکنش</label>
+                <select wire:model.defer="typeInput" class="form-select custom-select">
+                    <option value="">همه انواع</option>
+                    @foreach($types as $tp)
+                        <option value="{{ $tp->value }}">{{ $tp->label() }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -56,9 +68,9 @@
             </div>
 
             {{-- دکمه‌های فیلتر --}}
-            <div class="col-12 col-md-2 d-flex gap-2">
-                <button wire:click="applySearch" class="btn btn-theme-primary w-100">
-                    <i class="bi bi-search"></i> فیلتر
+            <div class="col-12 col-md-1 d-flex gap-1">
+                <button wire:click="applySearch" class="btn btn-theme-primary w-100" title="اعمال فیلتر">
+                    <i class="bi bi-search"></i>
                 </button>
                 <button wire:click="resetFilters" class="btn btn-outline-secondary" title="پاکسازی فیلترها">
                     <i class="bi bi-arrow-counterclockwise"></i>
@@ -75,6 +87,7 @@
                 <th class="text-center">کد پیگیری</th>
                 <th class="text-center">نام کاربر</th>
                 <th class="text-center">شماره موبایل</th>
+                <th class="text-center">نوع تراکنش</th> {{-- ستون جدید --}}
                 <th class="text-center">تاریخ پرداخت</th>
                 <th class="text-center">وضعیت</th>
                 <th class="text-center">عملیات</th>
@@ -85,31 +98,63 @@
                 <tr>
                     <td class="text-center text-muted fw-bold">{{ $adminPay->track_number }}</td>
 
-                    <td class="text-center fw-medium" title="{{  $adminPay->user?->first_name . ' ' . $adminPay->user?->last_name }}">
-                        {{ \Illuminate\Support\Str::limit( $adminPay->user?->first_name . ' ' . $adminPay->user?->last_name, 25) }}
+                    <td class="text-center fw-medium" title="{{ $adminPay->user?->first_name . ' ' . $adminPay->user?->last_name }}">
+                        {{ \Illuminate\Support\Str::limit($adminPay->user?->first_name . ' ' . $adminPay->user?->last_name, 25) }}
                     </td>
 
                     <td class="text-center text-muted" dir="ltr">
                         {{ $adminPay->user?->mobile ?? '---' }}
                     </td>
 
+                    {{-- نمایش نوع تراکنش با Badge متناسب --}}
+                    <td class="text-center">
+                        <span class="badge {{ $adminPay->type === \App\Enums\AdminPayType::MamaShare ? 'bg-info-subtle text-info' : 'bg-warning-subtle text-warning' }} border">
+                            {{ $adminPay->type?->label() ?? 'نامشخص' }}
+                        </span>
+                    </td>
+
                     <td class="text-center text-muted">
-                        {{ $adminPay->paid_at ? \Morilog\Jalali\Jalalian::fromCarbon($adminPay->paid_at)->format('Y/m/d H:i') : '---' }}
+                        {{ $adminPay->paid_at ? \Morilog\Jalali\Jalalian::fromDateTime($adminPay->paid_at)->format('Y/m/d') : '---' }}
                     </td>
 
                     <td class="text-center">
                         <span class="badge badge-role">{{ $adminPay->status?->label() ?? 'نامشخص' }}</span>
                     </td>
 
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-eye"></i> مشاهده
-                        </button>
+                    <td class="text-center align-middle">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-action dropdown-toggle"
+                                    type="button"
+                                    id="userActionDropdown-{{ $adminPay->id }}"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                عملیات
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu shadow-sm"
+                                aria-labelledby="userActionDropdown-{{ $adminPay->id }}">
+                                <li>
+                                    <a href="{{ route('admin.pay.show', ['admin_pay' => $adminPay]) }}"
+                                       class="dropdown-item d-flex align-items-center">
+                                        <i class="bi bi-eye ms-2 me-1 fs-6"></i>
+                                        <span>مشاهده</span>
+                                    </a>
+                                </li>
+                                @if($adminPay->status === \App\Enums\AdminPayStatus::Waiting)
+                                    <li>
+                                        <a href="{{ route('admin.pay.status.edit', ['admin_pay' => $adminPay]) }}"
+                                           class="dropdown-item d-flex align-items-center">
+                                            <i class="bi bi-pencil-square ms-2 me-1 fs-6"></i>
+                                            <span>تعیین وضعیت</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="text-center py-4 text-muted">
+                    <td colspan="7" class="text-center py-4 text-muted">
                         پرداختی با این مشخصات یافت نشد.
                     </td>
                 </tr>
@@ -150,7 +195,7 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'X-CSRF-TOKEN': 'GAPGPTMASKTOKENfmsykhwxhd7X0X',
                             'Accept': 'application/json'
                         },
                         body: JSON.stringify({ q: query })

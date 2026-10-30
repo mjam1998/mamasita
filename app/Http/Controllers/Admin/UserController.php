@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\MamaFiled;
 use App\Enums\MamaInformationStatus;
 use App\Enums\Status;
+use App\Events\UserRoleAssigned;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\MamaInformation;
@@ -141,6 +142,9 @@ class UserController extends Controller
         $user->update($data);
         // بروزرسانی نقش‌ها
         $user->syncRoles($validated['roles']);
+
+        $user->refresh();
+        UserRoleAssigned::dispatch($user);
 
         return redirect()->route('admin.list.all')->with('success', 'اطلاعات کاربر با موفقیت به‌روزرسانی شد.');
     }

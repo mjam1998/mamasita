@@ -10,6 +10,7 @@ class AdminPay extends Model
 {
     protected $fillable = [
         'user_id',
+        'user_pay_id',
         'track_number',
         'amount',
         'type',
@@ -23,10 +24,16 @@ class AdminPay extends Model
     protected $casts = [
         'status' => AdminPayStatus::class,
         'type' => AdminPayType::class,
+        'paid_at' => 'datetime',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function userPay()
+    {
+        return $this->belongsTo(UserPay::class);
     }
 }

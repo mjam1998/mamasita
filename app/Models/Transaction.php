@@ -19,6 +19,8 @@ class Transaction extends Model
         'available_balance_after',
         'blocked_balance_after',
         'description',
+        'referenceable_type',
+        'referenceable_id',
     ];
 
     protected $casts = [

@@ -57,8 +57,12 @@ Route::prefix('/admin')->group(function () {
         Route::get('/index', [AdminPayController::class, 'index'])->name('admin.pay.index');
         Route::get('/create', [AdminPayController::class, 'create'])->name('admin.pay.create');
         Route::post('/store', [AdminPayController::class, 'store'])->name('admin.pay.store');
-        Route::get('/{plan}/edit', [AdminPayController::class, 'edit'])->name('admin.pay.edit');
-        Route::put('/update/{plan}', [AdminPayController::class, 'update'])->name('admin.pay.update');
+        Route::get('/show/{admin_pay}', [AdminPayController::class, 'show'])->name('admin.pay.show');
+        Route::get('pays/{admin_pay}/status', [AdminPayController::class, 'editStatus'])->name('admin.pay.status.edit');
+        Route::put('pays/{admin_pay}/status', [AdminPayController::class, 'updateStatus'])->name('admin.pay.status.update');
+
+        Route::get('/search/mamas', [AdminPayController::class, 'searchMamas'])->name('admin.pay.search.mamas');
+        Route::get('/search/user-pays', [AdminPayController::class, 'searchUserPays'])->name('admin.pay.search.user-pays');
     });
 
 });
