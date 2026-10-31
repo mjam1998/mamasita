@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('wallet_id');
+            $table->string('track_number', 10)->unique();
             $table->decimal('amount', 15, 0);
             $table->tinyInteger('direction')->comment('credit: 1، debit: 2، internal: 3');
             $table->tinyInteger('type')->comment('deposit:1, withdraw:2, block:3, unblock:4, settle:5, deposit-blocked:6');

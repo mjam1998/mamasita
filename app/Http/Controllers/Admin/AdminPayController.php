@@ -85,6 +85,7 @@ class AdminPayController extends Controller
                     Transaction::create([
                         'wallet_id' => $wallet->id,
                         'amount' => $validated['amount'],
+                        'track_number' => strtoupper(Str::random(6)),
                         'direction' => TransactionDirection::Debit, // بدهکار / Debit
                         'type' => TransactionType::Withdraw, // برداشت / Withdraw
                         'total_balance_after' => $wallet->total_balance,
@@ -268,6 +269,7 @@ class AdminPayController extends Controller
                         // ثبت سند تراکنش واریزی / بازگشت وجه
                         Transaction::create([
                             'wallet_id' => $wallet->id,
+                            'track_number' => strtoupper(Str::random(6)),
                             'amount' => $adminPay->amount,
                             'direction' => TransactionDirection::Credit,
                             'type' => TransactionType::Deposit,

@@ -69,6 +69,12 @@
                                         <span>حوزه فعالیت</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('admin.wallets.user', $user->id) }}" class="dropdown-item d-flex align-items-center">
+                                        <i class="bi bi-wallet2 ms-2 me-1 fs-6"></i>
+                                        <span>کیف پول</span>
+                                    </a>
+                                </li>
 
                             </ul>
                         </div>

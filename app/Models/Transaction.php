@@ -12,6 +12,7 @@ class Transaction extends Model
 {
     protected $fillable = [
         'wallet_id',
+        'track_number',
         'amount',
         'direction',
         'type',
