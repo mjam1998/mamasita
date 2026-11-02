@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=" پنل مدیریت ماماسیتا"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>پنل مدیریت ماماسیتا</title>
 
     <link rel="stylesheet" href="{{asset('front/assets/bootstrap/bootstrap.rtl.min.css')}}"/>
@@ -110,6 +111,16 @@
                 href="{{route('admin.pay.index')}}"
             >
                 <i class="bi bi-cash-coin"></i><span>پرداخت‌های سایت </span>
+            </a>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.user-pays.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" پرداخت ها"
+                type="button"
+                href="{{route('admin.user-pays.index')}}"
+            >
+                <i class="bi bi-coin"></i><span>پرداخت‌های کاربران </span>
             </a>
             <button class="sidebar-link" data-page="articles" data-title="مقالات" type="button">
                 <i class="bi bi-file-earmark-text"> </i><span>مقالات</span>

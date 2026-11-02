@@ -15,6 +15,8 @@ class UserPay extends Model
         'bank_ref_number',
         'is_paid',
         'paid_at',
+        'referenceable_type',
+        'referenceable_id',
     ];
 
     protected $casts = [

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPayController;
 use App\Http\Controllers\Admin\AdminPlanController;
+use App\Http\Controllers\Admin\AdminUserPayController;
 use App\Http\Controllers\Admin\AdminWalletController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserListController;
@@ -71,6 +72,11 @@ Route::prefix('/admin')->group(function () {
         Route::get('/transactions/{transaction}', [AdminWalletController::class, 'showTransaction'])->name('admin.wallets.transactions.show');
         Route::get('/user/{user}/transactions/create', [AdminWalletController::class, 'createTransaction'])->name('admin.wallets.transactions.create');
         Route::post('/user/{user}/transactions', [AdminWalletController::class, 'storeTransaction'])->name('admin.wallets.transactions.store');
+    });
+
+    Route::prefix('/user-pays')->group(function () {
+        Route::get('/index', [AdminUserPayController::class, 'index'])->name('admin.user-pays.index');
+        Route::get('/show/{user_pay}', [AdminUserPayController::class, 'show'])->name('admin.user-pays.show');
     });
 
 });

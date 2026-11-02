@@ -189,13 +189,15 @@
                 const query = event.detail.value;
                 if (!query || query.length < 2) return;
 
+                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+
                 clearTimeout(searchTimeout);
                 searchTimeout = setTimeout(() => {
                     fetch("{{ route('admin.users.search') }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': 'GAPGPTMASKTOKENfmsykhwxhd7X0X',
+                            'X-CSRF-TOKEN': csrfToken,
                             'Accept': 'application/json'
                         },
                         body: JSON.stringify({ q: query })
