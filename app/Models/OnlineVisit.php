@@ -14,6 +14,7 @@ class OnlineVisit extends Model
         'mama_id',
         'ticket_id',
         'plan_id',
+        'track_number',
         'status',
         'total_price',
         'discount_amount',

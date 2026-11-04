@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\Course;
+use App\Models\CourseOrder;
 use App\Models\DoulaSubscription;
 use App\Models\MonthlySubscription;
 use App\Models\OnlineVisit;
@@ -19,20 +19,32 @@ class AdminUserPayTable extends Component
 
     // فیلترهای ورودی
     public $searchInput = '';
+
     public $bankRefInput = '';
+
     public $selectedUserId = '';
+
     public $referenceableTypeInput = '';
+
     public $paidDateJalali = '';
+
     public $statusInput = '';
+
     public $onlyPaid = false; // چک‌باکس فقط پرداخت‌شده‌ها
 
     // مقادیر اعمال‌شده در کوئری
     public $search = '';
+
     public $bankRef = '';
+
     public $userId = '';
+
     public $referenceableType = '';
+
     public $paidDate = '';
+
     public $status = '';
+
     public $isPaid = false;
 
     public function applySearch()
@@ -85,10 +97,10 @@ class AdminUserPayTable extends Component
     public function render()
     {
         $referenceableTypes = [
-            Course::class              => 'دوره آموزشی / ویدیویی',
-            OnlineVisit::class         => 'ویزیت آنلاین',
+            CourseOrder::class => 'دوره آموزشی / ویدیویی',
+            OnlineVisit::class => 'ویزیت آنلاین',
             MonthlySubscription::class => 'اشتراک ماهیانه',
-            DoulaSubscription::class   => 'اشتراک ماما همراه',
+            DoulaSubscription::class => 'اشتراک ماما همراه',
         ];
 
         $userPays = UserPay::query()
@@ -131,7 +143,7 @@ class AdminUserPayTable extends Component
             ->paginate(12);
 
         return view('livewire.admin.admin-user-pay-table', [
-            'userPays'           => $userPays,
+            'userPays' => $userPays,
             'referenceableTypes' => $referenceableTypes,
         ]);
     }

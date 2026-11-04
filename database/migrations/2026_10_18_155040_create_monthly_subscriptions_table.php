@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('mama_id');
             $table->unsignedBigInteger('plan_id');
             $table->unsignedBigInteger('ticket_id')->nullable();
+            $table->string('track_number', 10)->unique();
             $table->tinyInteger('month_period')->nullable();
             $table->tinyInteger('status')->default(0)->comment('0-pay-waiting,1-active,2-completed,3-canceled');
             $table->decimal('total_price', 15, 0);

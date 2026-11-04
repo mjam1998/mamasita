@@ -12,6 +12,7 @@ class CourseOrder extends Model
     protected $fillable = [
         'course_id',
         'user_id',
+        'track_number',
         'total_price',
         'discount_amount',
         'pay_amount',

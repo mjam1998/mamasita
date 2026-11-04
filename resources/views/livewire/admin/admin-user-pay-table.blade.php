@@ -170,37 +170,15 @@
                             </span>
                         @endif
                     </td>
-
                     <td class="text-center align-middle">
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-action dropdown-toggle"
-                                    type="button"
-                                    id="userPayAction-{{ $userPay->id }}"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                عملیات
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu shadow-sm"
-                                aria-labelledby="userPayAction-{{ $userPay->id }}">
-                                <li>
-                                    <a href="{{ route('admin.user-pays.show', $userPay->id) }}"
-                                       class="dropdown-item d-flex align-items-center">
-                                        <i class="bi bi-eye ms-2 me-1 fs-6"></i>
-                                        <span>مشاهده فاکتور</span>
-                                    </a>
-                                </li>
-                                @if($userPay->user_id)
-                                    <li>
-                                        <a href="{{ route('admin.wallets.user', $userPay->user_id) }}"
-                                           class="dropdown-item d-flex align-items-center">
-                                            <i class="bi bi-wallet2 ms-2 me-1 fs-6"></i>
-                                            <span>کیف پول کاربر</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
+                        <a href="{{ route('admin.user-pays.show', $userPay->id) }}"
+                           class="btn btn-sm d-inline-flex align-items-center gap-1 rounded-pill px-3 py-1"
+                           style="background-color: var(--primary-soft); color: var(--primary); border: 1px solid rgba(192, 57, 110, 0.15);">
+                            <i class="bi bi-eye"></i>
+                            <span>مشاهده</span>
+                        </a>
                     </td>
+
                 </tr>
             @empty
                 <tr>

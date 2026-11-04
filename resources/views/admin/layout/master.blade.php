@@ -120,7 +120,7 @@
                 type="button"
                 href="{{route('admin.user-pays.index')}}"
             >
-                <i class="bi bi-coin"></i><span>پرداخت‌های کاربران </span>
+                <i class="bi bi-receipt-cutoff"></i><span>پرداخت‌های کاربران </span>
             </a>
             <button class="sidebar-link" data-page="articles" data-title="مقالات" type="button">
                 <i class="bi bi-file-earmark-text"> </i><span>مقالات</span>

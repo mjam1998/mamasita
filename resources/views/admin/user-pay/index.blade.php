@@ -5,7 +5,7 @@
 
 
     <h3 class="section-title mb-4">
-        <i class="bi bi-cash-coin"> </i>لیست پرداخت های کاربران
+        <i class="bi bi-receipt-cutoff"> </i>لیست پرداخت های کاربران
     </h3>
     @if(session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

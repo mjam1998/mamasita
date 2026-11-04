@@ -15,6 +15,7 @@ class DoulaSubscription extends Model
         'plan_id',
         'province_id',
         'city_id',
+        'track_number',
         'status',
         'total_price',
         'discount_amount',

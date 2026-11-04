@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('track_number', 10)->unique();
             $table->decimal('total_price', 15, 0);
             $table->decimal('discount_amount', 15, 0)->default(0);
             $table->decimal('pay_amount', 15, 0);

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('plan_id');
             $table->unsignedBigInteger('province_id');
             $table->unsignedBigInteger('city_id');
+            $table->string('track_number', 10)->unique();
             $table->tinyInteger('status')->default(0)->comment('0-pay-waiting,1-mama-waiting,2-mom-waiting,3-completed,4-mom-rejected,5-canceled');
             $table->decimal('total_price', 15, 0);
             $table->decimal('discount_amount', 15, 0)->default(0);
