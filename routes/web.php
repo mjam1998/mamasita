@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPayController;
 use App\Http\Controllers\Admin\AdminPlanController;
+use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminUserPayController;
 use App\Http\Controllers\Admin\AdminWalletController;
 use App\Http\Controllers\Admin\UserController;
@@ -77,6 +78,10 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('/user-pays')->group(function () {
         Route::get('/index', [AdminUserPayController::class, 'index'])->name('admin.user-pays.index');
         Route::get('/show/{user_pay}', [AdminUserPayController::class, 'show'])->name('admin.user-pays.show');
+    });
+
+    Route::prefix('/tickets')->group(function () {
+        Route::get('/index', [AdminTicketController::class, 'index'])->name('admin.ticket.index');
     });
 
 });

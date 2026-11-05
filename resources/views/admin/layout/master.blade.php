@@ -122,12 +122,19 @@
             >
                 <i class="bi bi-receipt-cutoff"></i><span>پرداخت‌های کاربران </span>
             </a>
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.ticket.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" تیکت ها"
+                type="button"
+                href="{{route('admin.ticket.index')}}"
+            >
+                <i class="bi bi-chat-dots"></i><span>تیکت ها </span>
+            </a>
             <button class="sidebar-link" data-page="articles" data-title="مقالات" type="button">
                 <i class="bi bi-file-earmark-text"> </i><span>مقالات</span>
             </button>
-            <button class="sidebar-link" data-page="messages" data-title="پیام‌ها" type="button">
-                <i class="bi bi-chat-dots"></i><span>پیام‌ ها</span><span class="menu-badge">۵</span>
-            </button>
+
             <span class="nav-heading secondary-heading">مدیریت سیستم</span>
             <button class="sidebar-link"  data-page="reports" data-title="گزارش‌ها" type="button">
                 <i class="bi bi-bar-chart-line"></i><span>گزارش‌ها</span>

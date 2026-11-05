@@ -10,8 +10,8 @@ class Ticket extends BaseTicket
     public function __construct(array $attributes = [])
     {
         $this->mergeFillable([
-            'ticketable_id',
-            'ticketable_type',
+            'mama_id',
+            'track_number',
         ]);
 
         parent::__construct($attributes);
