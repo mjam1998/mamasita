@@ -9,6 +9,9 @@ class Message extends BaseMessage
     public function __construct(array $attributes = [])
     {
         $this->mergeFillable([
+            'ticket_id',
+            'user_id',
+            'message',
             'attachment',
         ]);
 

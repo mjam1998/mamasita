@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Admin;
 
-use Coderflex\LaravelTicket\Models\Ticket;
+
+use App\Models\Ticket;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Morilog\Jalali\Jalalian;
@@ -48,6 +49,7 @@ class AdminTicketTable extends Component
         $this->isResolved = $this->isResolvedInput;
 
         if (! empty($this->dateInput)) {
+
             $this->date = Jalalian::fromFormat('Y/n/j', $this->dateInput)->toCarbon()->format('Y-m-d');
         }
 
@@ -69,7 +71,7 @@ class AdminTicketTable extends Component
             ->when($this->userId, fn ($q) => $q->where('user_id', $this->userId))
             ->when($this->mamaId, fn ($q) => $q->where('mama_id', $this->mamaId))
             ->when($this->status, fn ($q) => $q->where('status', $this->status))
-            ->when($this->isResolved !== '', fn ($q) => $q->where('is_resolved', $this->isResolved))
+            ->when(filled($this->isResolved), fn ($q) => $q->where('is_resolved', $this->isResolved))
             ->when($this->date, fn ($q) => $q->whereDate('created_at', $this->date))
             ->latest()
             ->paginate(15);

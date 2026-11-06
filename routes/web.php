@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\MamaDocumentController;
+use App\Http\Controllers\TicketAttachmentController;
 use App\Http\Controllers\TinyMceImageController;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +83,14 @@ Route::prefix('/admin')->group(function () {
 
     Route::prefix('/tickets')->group(function () {
         Route::get('/index', [AdminTicketController::class, 'index'])->name('admin.ticket.index');
+        Route::get('/{ticket}', [AdminTicketController::class, 'show'])->name('admin.ticket.show');
+        Route::post('/{ticket}/reply', [AdminTicketController::class, 'reply'])->name('admin.ticket.reply');
+        Route::patch('/tickets/{ticket}/status', [AdminTicketController::class, 'toggleStatus'])
+            ->name('admin.ticket.status');
+
+        // روت دانلود فایل
+        Route::get('/{ticket}/attachment/{filename}', [TicketAttachmentController::class, 'viewAttachment'])
+            ->name('admin.ticket.attachment');
     });
 
 });

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Coderflex\LaravelTicket\Models\Ticket as BaseTicket;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Ticket extends BaseTicket
 {
@@ -17,8 +16,9 @@ class Ticket extends BaseTicket
         parent::__construct($attributes);
     }
 
-    public function ticketable(): MorphTo
+    public function mama()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class, 'mama_id');
     }
+
 }

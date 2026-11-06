@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\Message;
+use App\Models\Ticket;
 use Coderflex\LaravelTicket\Models\Category;
 use Coderflex\LaravelTicket\Models\Label;
-use Coderflex\LaravelTicket\Models\Message;
-use Coderflex\LaravelTicket\Models\Ticket;
 
 return [
     /*

@@ -41,17 +41,15 @@
             </div>
 
             {{-- فیلتر تاریخ ایجاد --}}
-            <div class="col-12 col-md-3 col-lg-2">
+            <div class="col-12 col-md-2" wire:ignore>
                 <label class="form-label small text-muted">تاریخ ایجاد</label>
                 <div class="input-group">
-                <input type="text"
-                       id="persianDate"
-                       wire:model.defer="dateInput"
-                       class="form-control custom-input text-center"
-                       placeholder="1403/01/01"
-                       data-jdp
-                       autocomplete="off">
-                <span class="input-group-text bg-white border-start-0 cursor-pointer" id="pdp-calendar-icon">
+                    <input type="text"
+                           id="persian-datepicker-input"
+                           class="form-control custom-input"
+                           placeholder="1403/01/01"
+                           autocomplete="off">
+                    <span class="input-group-text bg-white border-start-0 cursor-pointer" id="pdp-calendar-icon">
                         <i class="bi bi-calendar-event"></i>
                     </span>
                 </div>
@@ -117,7 +115,7 @@
                     </td>
 
                     <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-chat-dots"></i> مشاهده</a>
+                        <a href="{{route('admin.ticket.show',['ticket'=>$ticket])}}" class="btn btn-sm btn-outline-primary"><i class="bi bi-chat-dots"></i> مشاهده</a>
                     </td>
                 </tr>
                 @empty
@@ -164,13 +162,29 @@
                 mamaChoices.removeActiveItems();
 
                 // ۲. پاک کردن فیلد تاریخ
-                const dateInput = document.getElementById('persianDate');
+                const dateInput = document.getElementById('persian-datepicker-input');
                 if (dateInput) {
                     dateInput.value = '';
                     dateInput.dispatchEvent(new Event('input')); // اطلاع به لایووایر
                     dateInput.dispatchEvent(new Event('change'));
                 }
             });
+            const dateInput = $('#persian-datepicker-input');
+            if (dateInput.length) {
+                dateInput.persianDatepicker({
+                    format: 'YYYY/MM/DD',
+                    autoClose: true,
+                    initialValue: false,
+                    onSelect: function (unix) {
+                        const selectedVal = dateInput.val();
+                    @this.set('dateInput', selectedVal);
+                    }
+                });
+
+                $('#pdp-calendar-icon').on('click', function () {
+                    dateInput.focus();
+                });
+            }
 
         });
     </script>
