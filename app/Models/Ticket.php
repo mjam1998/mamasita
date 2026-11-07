@@ -11,6 +11,7 @@ class Ticket extends BaseTicket
         $this->mergeFillable([
             'mama_id',
             'track_number',
+            'status'
         ]);
 
         parent::__construct($attributes);

@@ -46,24 +46,22 @@ class AdminTicketController extends Controller
         }
 
         $ticket->messages()->create([
-//            'user_id' => auth()->id(),
-            'user_id' => 1,
+            'user_id' => auth()->id() ?? 1,
             'message' => $request->message,
             'attachment' => $attachmentName,
         ]);
-
-
 
         return back()->with('success', 'پاسخ ارسال شد.');
     }
 
     public function toggleStatus(Request $request, Ticket $ticket)
     {
+
         $request->validate([
             'status' => 'required|in:open,closed',
         ]);
 
-        if ($request->status === 'closed') {
+        if ($request->status == 'closed') {
             $ticket->close(); // استفاده از متد داخلی پکیج
         } else {
             $ticket->reopen(); // استفاده از متد داخلی پکیج

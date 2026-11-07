@@ -85,7 +85,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/index', [AdminTicketController::class, 'index'])->name('admin.ticket.index');
         Route::get('/{ticket}', [AdminTicketController::class, 'show'])->name('admin.ticket.show');
         Route::post('/{ticket}/reply', [AdminTicketController::class, 'reply'])->name('admin.ticket.reply');
-        Route::patch('/tickets/{ticket}/status', [AdminTicketController::class, 'toggleStatus'])
+        Route::patch('/{ticket}/status', [AdminTicketController::class, 'toggleStatus'])
             ->name('admin.ticket.status');
 
         // روت دانلود فایل
