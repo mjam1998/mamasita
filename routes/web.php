@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminOnlineVisitController;
 use App\Http\Controllers\Admin\AdminPayController;
 use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\AdminTicketController;
@@ -91,6 +92,11 @@ Route::prefix('/admin')->group(function () {
         // روت دانلود فایل
         Route::get('/{ticket}/attachment/{filename}', [TicketAttachmentController::class, 'viewAttachment'])
             ->name('admin.ticket.attachment');
+    });
+
+    Route::prefix('/online-visits')->group(function () {
+        Route::get('/index', [AdminOnlineVisitController::class, 'index'])->name('admin.online-visit.index');
+        Route::get('/show/{online_visit}', [AdminOnlineVisitController::class, 'show'])->name('admin.online-visit.show');
     });
 
 });

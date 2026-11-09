@@ -34,7 +34,7 @@ class OnlineVisit extends Model
 
     public function mama()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'mama_id');
     }
 
     public function plan()

@@ -122,6 +122,17 @@
             >
                 <i class="bi bi-receipt-cutoff"></i><span>پرداخت‌های کاربران </span>
             </a>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.online-visit.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" لیست اشتراک ویزیت انلاین"
+                type="button"
+                href="{{route('admin.online-visit.index')}}"
+            >
+                <i class="bi bi-phone"></i><span> اشتراک های ویزیت آنلاین </span>
+            </a>
+
             <a
                 class="sidebar-link {{ request()->routeIs('admin.ticket.*') ? 'active' : '' }}"
                 data-page="courses"
