@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminDoulaSubscriptionController;
 use App\Http\Controllers\Admin\AdminOnlineVisitController;
 use App\Http\Controllers\Admin\AdminPayController;
 use App\Http\Controllers\Admin\AdminPlanController;
@@ -96,6 +97,11 @@ Route::prefix('/admin')->group(function () {
 
     Route::prefix('/online-visits')->group(function () {
         Route::get('/index', [AdminOnlineVisitController::class, 'index'])->name('admin.online-visit.index');
+        Route::get('/show/{online_visit}', [AdminOnlineVisitController::class, 'show'])->name('admin.online-visit.show');
+    });
+
+    Route::prefix('/doula-subscription')->group(function () {
+        Route::get('/index', [AdminDoulaSubscriptionController::class, 'index'])->name('admin.doula-subscription.index');
         Route::get('/show/{online_visit}', [AdminOnlineVisitController::class, 'show'])->name('admin.online-visit.show');
     });
 

@@ -134,6 +134,16 @@
             </a>
 
             <a
+                class="sidebar-link {{ request()->routeIs('admin.doula-subscription.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" لیست اشتراک ماما همراه"
+                type="button"
+                href="{{route('admin.doula-subscription.index')}}"
+            >
+                <i class="bi bi-heart-pulse-fill"></i><span> اشتراک های ماما همراه </span>
+            </a>
+
+            <a
                 class="sidebar-link {{ request()->routeIs('admin.ticket.*') ? 'active' : '' }}"
                 data-page="courses"
                 data-title=" تیکت ها"
