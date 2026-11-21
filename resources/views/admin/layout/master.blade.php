@@ -152,6 +152,18 @@
             >
                 <i class="bi bi-chat-dots"></i><span>تیکت ها </span>
             </a>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.videos.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" ویدئو ها"
+                type="button"
+                href="{{route('admin.videos.index')}}"
+            >
+                <i class="bi bi-film"></i><span>ویدئو ها </span>
+            </a>
+
+
             <button class="sidebar-link" data-page="articles" data-title="مقالات" type="button">
                 <i class="bi bi-file-earmark-text"> </i><span>مقالات</span>
             </button>

@@ -135,7 +135,7 @@
 
                             <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu shadow-sm" aria-labelledby="userActionDropdown-{{ $doulaSubscription->id }}">
                                 <li>
-                                    <a href="{{ route('admin.online-visit.show', ['online_visit' => $doulaSubscription]) }}" class="dropdown-item d-flex align-items-center">
+                                    <a href="{{ route('admin.doula-subscription.show', ['doula_subscription' => $doulaSubscription]) }}" class="dropdown-item d-flex align-items-center">
                                         <i class="bi bi-pencil-square ms-2 me-1 fs-6"></i>
                                         <span>مشاهده</span>
                                     </a>

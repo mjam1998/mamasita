@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminDoulaSubscriptionController;
 use App\Http\Controllers\Admin\AdminOnlineVisitController;
 use App\Http\Controllers\Admin\AdminPayController;
 use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\AdminTicketController;
 use App\Http\Controllers\Admin\AdminUserPayController;
+use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Admin\AdminVideoStreamController;
 use App\Http\Controllers\Admin\AdminWalletController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserListController;
@@ -102,7 +105,24 @@ Route::prefix('/admin')->group(function () {
 
     Route::prefix('/doula-subscription')->group(function () {
         Route::get('/index', [AdminDoulaSubscriptionController::class, 'index'])->name('admin.doula-subscription.index');
-        Route::get('/show/{online_visit}', [AdminOnlineVisitController::class, 'show'])->name('admin.online-visit.show');
+        Route::get('/{doula_subscription}', [AdminDoulaSubscriptionController::class, 'show'])->name('admin.doula-subscription.show');
+    });
+
+    Route::prefix('/videos')->group(function () {
+        Route::get('/index', [AdminVideoController::class, 'index'])->name('admin.videos.index');
+        Route::get('/create', [AdminVideoController::class, 'create'])->name('admin.videos.create');
+        Route::post('/store', [AdminVideoController::class, 'store'])->name('admin.videos.store');
+        Route::get('/{video}/edit', [AdminVideoController::class, 'edit'])->name('admin.videos.edit');
+        Route::put('/{video}/update', [AdminVideoController::class, 'update'])->name('admin.videos.update');
+
+    });
+
+    Route::get('/videos/{video}/stream', [AdminVideoStreamController::class, 'stream'])
+        ->name('admin.videos.stream');
+
+    Route::prefix('/courses')->group(function () {
+        Route::post('/search', [AdminCourseController::class, 'search'])->name('admin.courses.search');
+
     });
 
 });
