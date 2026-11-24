@@ -144,6 +144,16 @@
             </a>
 
             <a
+                class="sidebar-link {{ request()->routeIs('admin.monthly-subscriptions.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" لیست اشتراک ماهانه"
+                type="button"
+                href="{{route('admin.monthly-subscriptions.index')}}"
+            >
+                <i class="bi bi-calendar2-check-fill"></i><span> اشتراک های ماهانه </span>
+            </a>
+
+            <a
                 class="sidebar-link {{ request()->routeIs('admin.ticket.*') ? 'active' : '' }}"
                 data-page="courses"
                 data-title=" تیکت ها"

@@ -30,12 +30,12 @@ class MonthlySubscription extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function mama()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'mama_id');
     }
 
     public function plan()

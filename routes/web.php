@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminDoulaSubscriptionController;
+use App\Http\Controllers\Admin\AdminMonthlySubscriptionController;
 use App\Http\Controllers\Admin\AdminOnlineVisitController;
 use App\Http\Controllers\Admin\AdminPayController;
 use App\Http\Controllers\Admin\AdminPlanController;
@@ -123,6 +124,11 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('/courses')->group(function () {
         Route::post('/search', [AdminCourseController::class, 'search'])->name('admin.courses.search');
 
+    });
+
+    Route::prefix('/monthly-subscriptions')->group(function () {
+        Route::get('/index', [AdminMonthlySubscriptionController::class, 'index'])->name('admin.monthly-subscriptions.index');
+        Route::get('/show/{monthly_subscription}', [AdminMonthlySubscriptionController::class, 'show'])->name('admin.monthly-subscriptions.show');
     });
 
 });
