@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCallController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminDoulaSubscriptionController;
@@ -129,6 +130,14 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('/monthly-subscriptions')->group(function () {
         Route::get('/index', [AdminMonthlySubscriptionController::class, 'index'])->name('admin.monthly-subscriptions.index');
         Route::get('/show/{monthly_subscription}', [AdminMonthlySubscriptionController::class, 'show'])->name('admin.monthly-subscriptions.show');
+    });
+
+    Route::prefix('/calls')->group(function () {
+        Route::get('/index', [AdminCallController::class, 'index'])->name('admin.calls.index');
+        Route::get('/show/{call}', [AdminCallController::class, 'show'])->name('admin.calls.show');
+
+        Route::get('/by-subscription/{track_number}', [AdminCallController::class, 'bySubscription'])
+            ->name('admin.calls.by-subscription');
     });
 
 });

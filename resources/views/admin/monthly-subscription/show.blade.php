@@ -245,6 +245,91 @@
             </div>
 
 
+            {{-- ویدیوهای هفتگی --}}
+            <div class="col-12">
+                <div class="ov-card">
+                    <div class="ov-title">ویدیوهای هفتگی</div>
+
+                    @if($monthlySubscription->WeeklyVideos->isNotEmpty())
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                <tr class="text-center ov-label">
+                                    <th>#</th>
+                                    <th>عنوان ویدیو</th>
+                                    <th>تاریخ نمایش</th>
+                                    <th>مشاهده شده</th>
+                                    <th>امتیاز</th>
+                                    <th>نظر کاربر</th>
+                                    <th>عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($monthlySubscription->WeeklyVideos as $index => $weeklyVideo)
+                                    <tr class="text-center">
+                                        <td class="text-muted">{{ $index + 1 }}</td>
+
+                                        {{-- عنوان ویدیو --}}
+                                        <td class="fw-bold">
+                                            @if($weeklyVideo->video)
+                                                {{ $weeklyVideo->video->title }}
+                                            @else
+                                                <span class="text-muted fst-italic">ویدیو آپلود نشده</span>
+                                            @endif
+                                        </td>
+
+                                        {{-- تاریخ نمایش --}}
+                                        <td class="text-muted">
+                                            {{ $weeklyVideo->show_date
+                                                ? \Morilog\Jalali\Jalalian::fromDateTime($weeklyVideo->show_date)->format('Y/m/d')
+                                                : '—' }}
+                                        </td>
+
+                                        {{-- مشاهده شده --}}
+                                        <td>
+                                            @if($weeklyVideo->is_seen)
+                                                <span class="ov-badge">
+                                        <i class="bi bi-check-circle-fill me-1"></i>بله
+                                    </span>
+                                            @else
+                                                <span class="ov-badge ov-badge-purple">
+                                        <i class="bi bi-clock me-1"></i>خیر
+                                    </span>
+                                            @endif
+                                        </td>
+
+                                        {{-- امتیاز --}}
+                                        <td>
+                                            {{ $weeklyVideo->rate ?? '—' }}
+                                        </td>
+
+                                        {{-- نظر کاربر --}}
+                                        <td class="text-muted" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            {{ $weeklyVideo->user_comment ?? '—' }}
+                                        </td>
+
+                                        {{-- عملیات --}}
+                                        <td>
+                                            @if($weeklyVideo->video)
+                                                <a href="{{ route('admin.videos.edit', $weeklyVideo->video) }}"
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-pencil-square"></i> مشاهده ویدیو
+                                                </a>
+                                            @else
+                                                <span class="ov-label fst-italic">منتظر آپلود</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="ov-label">ویدیوی هفتگی برای این اشتراک ثبت نشده است.</div>
+                    @endif
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

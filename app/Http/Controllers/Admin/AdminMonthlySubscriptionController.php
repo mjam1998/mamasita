@@ -21,6 +21,7 @@ class AdminMonthlySubscriptionController extends Controller
             'plan',
             'ticket',
             'userPay',
+            'WeeklyVideos.video',
         ]);
 
         return view('admin.monthly-subscription.show', compact('monthlySubscription'));

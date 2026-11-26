@@ -44,9 +44,7 @@
             >
                 <i class="bi bi-grid-1x2-fill"></i><span>داشبورد</span>
             </button>
-            <button class="sidebar-link"  data-page="orders" data-title="سفارش‌ها" type="button">
-                <i class="bi bi-bag-heart"></i><span>سفارش‌ها</span> <span class="menu-badge">۱۲</span>
-            </button>
+
             <button
                 class="sidebar-link"
                 data-page="courses"
@@ -171,6 +169,16 @@
                 href="{{route('admin.videos.index')}}"
             >
                 <i class="bi bi-film"></i><span>ویدئو ها </span>
+            </a>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.calls.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" تماس ها"
+                type="button"
+                href="{{route('admin.calls.index')}}"
+            >
+                <i class="bi bi-telephone"></i><span>تماس ها </span>
             </a>
 
 

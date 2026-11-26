@@ -133,6 +133,13 @@
                                     </a>
                                 </li>
 
+                                <li>
+                                    <a href="{{ route('admin.calls.by-subscription', ['track_number' => $monthlySubscription->track_number]) }}" class="dropdown-item d-flex align-items-center">
+                                        <i class="bi bi-telephone ms-2 me-1 fs-6"></i>
+                                        <span>تماس ها</span>
+                                    </a>
+                                </li>
+
 
                             </ul>
                         </div>
