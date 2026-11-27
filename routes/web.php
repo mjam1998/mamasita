@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminCallController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminCourseController;
 use App\Http\Controllers\Admin\AdminCourseOrderController;
 use App\Http\Controllers\Admin\AdminDoulaSubscriptionController;
+use App\Http\Controllers\Admin\AdminExtraPageController;
+use App\Http\Controllers\Admin\AdminHomeSectionController;
 use App\Http\Controllers\Admin\AdminMonthlySubscriptionController;
 use App\Http\Controllers\Admin\AdminOnlineVisitController;
 use App\Http\Controllers\Admin\AdminPayController;
@@ -17,6 +20,7 @@ use App\Http\Controllers\Admin\AdminWalletController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\MamaDocumentController;
 use App\Http\Controllers\TicketAttachmentController;
@@ -24,6 +28,10 @@ use App\Http\Controllers\TinyMceImageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::prefix('/locations')->group(function () {
     Route::get('/provinces', [LocationController::class, 'provinces'])->name('locations.provinces');
@@ -148,6 +156,27 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('/course-orders')->group(function () {
         Route::get('/index', [AdminCourseOrderController::class, 'index'])->name('admin.course-orders.index');
         Route::get('/show/{course_order}', [AdminCourseOrderController::class, 'show'])->name('admin.course-orders.show');
+    });
+
+    Route::prefix('/blogs')->group(function () {
+        Route::get('/index', [AdminBlogController::class, 'index'])->name('admin.blogs.index');
+        Route::get('/create', [AdminBlogController::class, 'create'])->name('admin.blogs.create');
+        Route::post('/store', [AdminBlogController::class, 'store'])->name('admin.blogs.store');
+        Route::get('/edit/{blog}', [AdminBlogController::class, 'edit'])->name('admin.blogs.edit');
+        Route::put('/update/{blog}', [AdminBlogController::class, 'update'])->name('admin.blogs.update');
+    });
+
+    Route::prefix('/extra-pages')->group(function () {
+        Route::get('/index', [AdminExtraPageController::class, 'index'])->name('admin.extra-pages.index');
+        Route::get('/create', [AdminExtraPageController::class, 'create'])->name('admin.extra-pages.create');
+        Route::post('/store', [AdminExtraPageController::class, 'store'])->name('admin.extra-pages.store');
+        Route::get('/edit/{page}', [AdminExtraPageController::class, 'edit'])->name('admin.extra-pages.edit');
+        Route::put('/update/{page}', [AdminExtraPageController::class, 'update'])->name('admin.extra-pages.update');
+    });
+
+    Route::prefix('/home-section')->group(function () {
+        Route::get('/edit', [AdminHomeSectionController::class, 'edit'])->name('admin.home-section.edit');
+        Route::put('/update', [AdminHomeSectionController::class, 'update'])->name('admin.home-section.update');
     });
 
 });

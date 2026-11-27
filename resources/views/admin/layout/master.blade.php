@@ -12,6 +12,7 @@
     <link href="{{asset('front/assets/bootstrap/choices.min.css')}}" rel="stylesheet" />
     <link href="{{asset('front/assets/fonts/vazirmatn-font-face.css')}}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('admin/assets/css/persianDatepicker-default.css')}}"/>
+    <link href="{{asset('front/assets/bootstrap/tagify.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}"/>
 
@@ -36,14 +37,17 @@
 
         <nav class="sidebar-nav" aria-label="منوی مدیریت">
             <span class="nav-heading">منوی اصلی</span>
-            <button
-                class="sidebar-link "
-                data-page="dashboard"
-                data-title="داشبورد"
+
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.index') ? 'active' : '' }}"
+                data-page="courses"
+                data-title="  داشبورد"
                 type="button"
+                href="{{route('admin.index')}}"
             >
-                <i class="bi bi-grid-1x2-fill"></i><span>داشبورد</span>
-            </button>
+                <i class="bi  bi-grid-1x2-fill"></i><span> داشبورد </span>
+            </a>
 
             <a
                 class="sidebar-link {{ request()->routeIs('admin.courses.*') ? 'active' : '' }}"
@@ -77,7 +81,7 @@
             <!-- آیتم بازشوی کاربران -->
             <div class="sidebar-dropdown">
                 <button
-                    class="sidebar-link w-100"
+                    class="sidebar-link w-100 {{ request()->routeIs('admin.list.*') ? 'active' : '' }}"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#usersSubmenu"
@@ -193,18 +197,38 @@
                 <i class="bi bi-telephone"></i><span>تماس ها </span>
             </a>
 
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" مقالات"
+                type="button"
+                href="{{route('admin.blogs.index')}}"
+            >
+                <i class="bi bi-file-earmark-text"></i><span> مقالات </span>
+            </a>
 
-            <button class="sidebar-link" data-page="articles" data-title="مقالات" type="button">
-                <i class="bi bi-file-earmark-text"> </i><span>مقالات</span>
-            </button>
 
             <span class="nav-heading secondary-heading">مدیریت سیستم</span>
-            <button class="sidebar-link"  data-page="reports" data-title="گزارش‌ها" type="button">
-                <i class="bi bi-bar-chart-line"></i><span>گزارش‌ها</span>
-            </button>
-            <button class="sidebar-link" data-page="settings" data-title="تنظیمات" type="button">
-                <i class="bi bi-gear"></i><span>تنظیمات</span>
-            </button>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.extra-pages.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" صفحات اضافه"
+                type="button"
+                href="{{route('admin.extra-pages.index')}}"
+            >
+                <i class="bi bi-browser-chrome"></i><span> صفحات اضافه </span>
+            </a>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.home-section.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" تنظیمات صفحه اصلی"
+                type="button"
+                href="{{route('admin.home-section.edit')}}"
+            >
+                <i class="bi bi-gear"></i><span> تنظیمات صفحه اصلی </span>
+            </a>
         </nav>
 
         <!-- <div class="sidebar-help">
@@ -268,11 +292,12 @@
     </div>
 </div>
 
-<script src="{{asset('front/assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
+<script  src="{{asset('front/assets/bootstrap/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/script.js')}}"></script>
 <script src="{{asset('front/assets/bootstrap/choices.min.js')}}"></script>
 <script src="{{asset('front/assets/bootstrap/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/persianDatepicker.min.js')}}"></script>
+<script src="{{asset('front/assets/bootstrap/tagify.js')}}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {

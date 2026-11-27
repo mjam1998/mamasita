@@ -44,6 +44,7 @@
                 <li class="nav-item"><a class="nav-link" href="#">مامای همراه</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">وبلاگ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">درباره ما</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('login')}}">ورود/ثبت نام</a></li>
             </ul>
 
             <div class="navbar-icons d-flex align-items-center gap-3">
