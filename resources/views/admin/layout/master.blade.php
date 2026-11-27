@@ -45,14 +45,26 @@
                 <i class="bi bi-grid-1x2-fill"></i><span>داشبورد</span>
             </button>
 
-            <button
-                class="sidebar-link"
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.courses.*') ? 'active' : '' }}"
                 data-page="courses"
-                data-title="دوره‌های آموزشی"
+                data-title="  دوره‌های آموزشی"
                 type="button"
+                href="{{route('admin.courses.index')}}"
             >
-                <i class="bi  bi-play-btn"></i><span>دوره‌های آموزشی</span>
-            </button>
+                <i class="bi  bi-play-btn"></i><span> دوره‌های آموزشی </span>
+            </a>
+
+            <a
+                class="sidebar-link {{ request()->routeIs('admin.course-orders.*') ? 'active' : '' }}"
+                data-page="courses"
+                data-title=" سفارشات دوره آموزشی"
+                type="button"
+                href="{{route('admin.course-orders.index')}}"
+            >
+                <i class="bi bi-bag-heart"></i><span> سفارشات دوره آموزشی </span>
+            </a>
+
             <a
                 class="sidebar-link {{ request()->routeIs('admin.plan.*') ? 'active' : '' }}"
                 data-page="courses"

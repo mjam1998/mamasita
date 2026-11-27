@@ -32,6 +32,11 @@ class CourseOrder extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function spotPlayerLicence()
+    {
+        return $this->hasOne(SpotPlayerLicence::class);
+    }
+
     public function userPay(): MorphMany
     {
         return $this->morphMany(UserPay::class, 'referenceable');

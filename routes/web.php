@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminCallController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminCourseController;
+use App\Http\Controllers\Admin\AdminCourseOrderController;
 use App\Http\Controllers\Admin\AdminDoulaSubscriptionController;
 use App\Http\Controllers\Admin\AdminMonthlySubscriptionController;
 use App\Http\Controllers\Admin\AdminOnlineVisitController;
@@ -123,8 +124,12 @@ Route::prefix('/admin')->group(function () {
         ->name('admin.videos.stream');
 
     Route::prefix('/courses')->group(function () {
+        Route::get('/index', [AdminCourseController::class, 'index'])->name('admin.courses.index');
         Route::post('/search', [AdminCourseController::class, 'search'])->name('admin.courses.search');
-
+        Route::get('/create', [AdminCourseController::class, 'create'])->name('admin.courses.create');
+        Route::post('/store', [AdminCourseController::class, 'store'])->name('admin.courses.store');
+        Route::get('/{course}/edit', [AdminCourseController::class, 'edit'])->name('admin.courses.edit');
+        Route::put('/{course}/update', [AdminCourseController::class, 'update'])->name('admin.courses.update');
     });
 
     Route::prefix('/monthly-subscriptions')->group(function () {
@@ -138,6 +143,11 @@ Route::prefix('/admin')->group(function () {
 
         Route::get('/by-subscription/{track_number}', [AdminCallController::class, 'bySubscription'])
             ->name('admin.calls.by-subscription');
+    });
+
+    Route::prefix('/course-orders')->group(function () {
+        Route::get('/index', [AdminCourseOrderController::class, 'index'])->name('admin.course-orders.index');
+        Route::get('/show/{course_order}', [AdminCourseOrderController::class, 'show'])->name('admin.course-orders.show');
     });
 
 });
